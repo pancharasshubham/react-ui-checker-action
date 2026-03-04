@@ -1,0 +1,31 @@
+# dependencies
+node_modules/
+
+# environment files
+.env
+.env.local
+
+# build output
+dist/
+build/
+.next/
+out/
+
+# logs
+logs/
+*.log
+
+# OS junk
+.DS_Store
+Thumbs.db
+
+# coverage
+coverage/
+
+# IDE files
+.vscode/
+.idea/
+
+# temp files
+*.tmp
+*.cache
