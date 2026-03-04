@@ -1,0 +1,5 @@
+name: "React UI Checker"
+description: "Detect UI issues in React projects"
+runs:
+  using: "node20"
+  main: "index.js"
