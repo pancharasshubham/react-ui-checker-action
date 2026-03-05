@@ -1,22 +1,52 @@
 const fs = require("fs");
 const path = require("path");
 
-const ignoredDirs = ["node_modules", ".git", "dist", "build"];
+const ignoredDirs = [
+  "node_modules",
+  ".git",
+  "dist",
+  "build",
+  ".next",
+  "coverage",
+  "checks",
+  "utils",
+  ".github"
+];
 
-function scanFiles(dir) {
+function scanFiles(dir, depth = 0) {
+  if (depth > 10) return [];
+
   let results = [];
 
-  const list = fs.readdirSync(dir);
+  let list;
+
+  try {
+    list = fs.readdirSync(dir);
+  } catch {
+    return results;
+  }
 
   list.forEach(file => {
     const filePath = path.join(dir, file);
-    const stat = fs.statSync(filePath);
 
-    if (stat && stat.isDirectory()) {
+    let stat;
+
+    try {
+      stat = fs.statSync(filePath);
+    } catch {
+      return;
+    }
+
+    if (stat.isDirectory()) {
       if (!ignoredDirs.includes(file)) {
-        results = results.concat(scanFiles(filePath));
+        results = results.concat(scanFiles(filePath, depth + 1));
       }
-    } else if (filePath.endsWith(".jsx") || filePath.endsWith(".tsx")) {
+    } else if (
+      filePath.endsWith(".js") ||
+      filePath.endsWith(".jsx") ||
+      filePath.endsWith(".ts") ||
+      filePath.endsWith(".tsx")
+    ) {
       results.push(filePath);
     }
   });

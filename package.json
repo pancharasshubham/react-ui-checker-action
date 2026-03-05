@@ -4,14 +4,14 @@
   "description": "Security-focused React UI checker for GitHub CI",
   "main": "index.js",
   "scripts": {
-     "start": "node index.js"
+    "start": "node index.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "type": "commonjs",
   "dependencies": {
-    "@actions/core": "^3.0.0",
+    "@actions/core": "^1.11.1",
     "@actions/github": "^9.0.0"
   }
 }
